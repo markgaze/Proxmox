@@ -2,9 +2,9 @@
     "name": "Homarr",
     "slug": "homarr",
     "categories": [
-        15
+        10
     ],
-    "date_created": "2024-05-02",
+    "date_created": "2025-01-28",
     "type": "ct",
     "updateable": true,
     "privileged": false,
@@ -19,7 +19,7 @@
             "script": "ct/homarr.sh",
             "resources": {
                 "cpu": 2,
-                "ram": 2048,
+                "ram": 4096,
                 "hdd": 8,
                 "os": "debian",
                 "version": "12"

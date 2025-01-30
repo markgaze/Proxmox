@@ -24,7 +24,7 @@ $STD apt-get install -y wget
 $STD apt-get install -y openssh-server
 msg_ok "Installed Dependencies"
 
-msg_info "Updating Python3"
+msg_info "Setup Python3"
 $STD apt-get install -y \
   python3 \
   python3-dev \
@@ -33,7 +33,7 @@ $STD apt-get install -y \
 
 $STD apt-get install -y python3-setuptools
 rm -rf /usr/lib/python3.*/EXTERNALLY-MANAGED
-msg_ok "Updated Python3"
+msg_ok "Setup Python3"
 
 msg_info "Creating user octoprint"
 useradd -m -s /bin/bash -p $(openssl passwd -1 octoprint) octoprint

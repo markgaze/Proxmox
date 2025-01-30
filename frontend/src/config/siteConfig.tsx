@@ -1,7 +1,7 @@
 import { OperatingSystem } from "@/lib/types";
 import { MessagesSquare, Scroll } from "lucide-react";
-import { FaDiscord, FaGithub } from "react-icons/fa";
 import React from "react";
+import { FaDiscord, FaGithub } from "react-icons/fa";
 
 export const basePath = process.env.BASE_PATH;
 
