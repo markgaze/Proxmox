@@ -33,7 +33,7 @@
   "notes": [
     {
       "text": "This instance uses BoltDB",
-      "type": "info",
+      "type": "info"
       
     },
     {

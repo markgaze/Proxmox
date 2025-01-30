@@ -116,6 +116,7 @@ export default function Page() {
 								Make managing your Homelab a breeze
 							</h1>
 							<div className="max-w-2xl gap-2 flex flex-col text-center sm:text-lg text-sm leading-relaxed tracking-tight text-muted-foreground md:text-xl">
+                <p>
               This project aims to take the community-made Proxmox Helper Scripts, originally started by tteck, and port it to arm64.
               <br />
               <br />
