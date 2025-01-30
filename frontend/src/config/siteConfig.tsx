@@ -26,14 +26,12 @@ export const navbarLinks = [
     icon: <Scroll className="h-4 w-4" />,
     text: "Change Log",
   },
-  !isMobile
-    ? {
+  {
         href: `https://github.com/asylumexp/Proxmox/discussions`,
         event: "Discussions",
         icon: <MessagesSquare className="h-4 w-4" />,
-        text: "Discussions",
-      }
-    : null,
+        text: "Discussions"
+      },
 ].filter(Boolean) as { href: string; event: string; icon: React.ReactNode; text: string }[];
 
 export const mostPopularScripts = [
