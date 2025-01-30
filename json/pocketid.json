@@ -39,5 +39,6 @@
       "text": "Configuration Path: `/opt/pocket-id/backend/.env`, `/opt/pocket-id/frontend/.env`.",
       "type": "info"
     }
-  ]
+  ],
+  "status": "🚧"
 }

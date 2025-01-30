@@ -35,5 +35,6 @@
             "text": "Execute within the Proxmox shell",
             "type": "info"
         }
-    ]
+    ],
+    "status": "🚧"
 }
