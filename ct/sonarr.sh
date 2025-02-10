@@ -34,7 +34,7 @@ function update_script() {
     fi
     msg_info "Updating $APP v4"
     systemctl stop sonarr.service
-    wget -q -O SonarrV4.tar.gz 'https://services.sonarr.tv/v1/download/main/latest?version=4&os=linux&arch=x64'
+    wget -q -O SonarrV4.tar.gz 'https://services.sonarr.tv/v1/download/main/latest?version=4&os=linux&arch=arm64'
     tar -xzf SonarrV4.tar.gz
     rm -rf /opt/Sonarr
     mv Sonarr /opt
