@@ -5,7 +5,6 @@ source <(curl -s https://raw.githubusercontent.com/asylumexp/Proxmox/main/misc/b
 # License: MIT | https://github.com/asylumexp/Proxmox/raw/main/LICENSE
 # Source: https://zipline.diced.sh/
 
-# App Default Values
 APP="Zipline"
 var_tags="file;sharing"
 var_cpu="2"
@@ -15,11 +14,7 @@ var_os="debian"
 var_version="12"
 var_unprivileged="1"
 
-# App Output & Base Settings
 header_info "$APP"
-base_settings
-
-# Core
 variables
 color
 catch_errors
@@ -30,6 +25,12 @@ function update_script() {
   if [[ ! -d /opt/zipline ]]; then
     msg_error "No ${APP} Installation Found!"
     exit
+  fi
+  if ! command -v pnpm &>/dev/null; then  
+    msg_info "Installing pnpm"
+    #export NODE_OPTIONS=--openssl-legacy-provider
+    npm install -g pnpm@latest &>/dev/null
+    msg_ok "Installed pnpm"
   fi
   RELEASE=$(curl -s https://api.github.com/repos/diced/zipline/releases/latest | grep "tag_name" | awk '{print substr($2, 3, length($2)-4) }')
   if [[ ! -f /opt/${APP}_version.txt ]] || [[ "${RELEASE}" != "$(cat /opt/${APP}_version.txt)" ]]; then
@@ -45,8 +46,8 @@ function update_script() {
     mv zipline-${RELEASE} /opt/zipline
     cd /opt/zipline
     mv /opt/.env /opt/zipline/.env
-    yarn install &>/dev/null
-    yarn build &>/dev/null
+    pnpm install &>/dev/null
+    pnpm build &>/dev/null
     echo "${RELEASE}" >/opt/${APP}_version.txt
     msg_ok "Updated ${APP}"
 

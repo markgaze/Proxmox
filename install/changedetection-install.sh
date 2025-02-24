@@ -60,7 +60,7 @@ msg_ok "Setup Python3"
 msg_info "Setting up Node.js Repository"
 mkdir -p /etc/apt/keyrings
 curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
-echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_20.x nodistro main" >/etc/apt/sources.list.d/nodesource.list
+echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_22.x nodistro main" >/etc/apt/sources.list.d/nodesource.list
 msg_ok "Set up Node.js Repository"
 
 msg_info "Installing Node.js"
@@ -78,7 +78,10 @@ mkdir /opt/browserless
 $STD python3 -m pip install playwright
 $STD git clone https://github.com/browserless/chrome /opt/browserless
 $STD npm install --prefix /opt/browserless
-$STD /opt/browserless/node_modules/playwright-core/cli.js install --with-deps chrome chromium firefox webkit
+$STD /opt/browserless/node_modules/playwright-core/cli.js install --with-deps &>/dev/null
+$STD /opt/browserless/node_modules/playwright-core/cli.js install --force chrome &>/dev/null
+$STD /opt/browserless/node_modules/playwright-core/cli.js install chromium firefox webkit &>/dev/null
+$STD /opt/browserless/node_modules/playwright-core/cli.js install --force msedge
 $STD npm run build --prefix /opt/browserless
 $STD npm run build:function --prefix /opt/browserless
 $STD npm prune production --prefix /opt/browserless

@@ -5,21 +5,16 @@ source <(curl -s https://raw.githubusercontent.com/asylumexp/Proxmox/main/misc/b
 # License: MIT | https://github.com/asylumexp/Proxmox/raw/main/LICENSE
 # Source: https://www.bunkerweb.io/
 
-# App Default Values
 APP="BunkerWeb"
 var_tags="webserver"
 var_cpu="2"
-var_ram="1024"
+var_ram="4096"
 var_disk="4"
 var_os="debian"
 var_version="12"
 var_unprivileged="1"
 
-# App Output & Base Settings
-header_info "$APP"
-base_settings
-
-# Core 
+header_info "$APP" 
 variables
 color
 catch_errors
@@ -39,7 +34,7 @@ Pin: version ${RELEASE}
 Pin-Priority: 1001
 EOF
   apt-get update
-  apt-get install -y nginx=1.26.2*
+  apt-get install -y nginx=1.26.3*
   apt-get install -y bunkerweb=${RELEASE}
   echo "${RELEASE}" >/opt/${APP}_version.txt
   msg_ok "Updated ${APP} to ${RELEASE}"

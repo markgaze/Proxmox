@@ -23,10 +23,10 @@ $STD apt-get install -y openssh-server
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Golang"
-$STD wget https://golang.org/dl/go1.20.1.linux-arm64.tar.gz
-$STD tar -xzf go1.20.1.linux-arm64.tar.gz -C /usr/local
+$STD wget https://golang.org/dl/go1.23.2.linux-arm64.tar.gz
+$STD tar -xzf go1.23.2.linux-arm64.tar.gz -C /usr/local
 $STD ln -s /usr/local/go/bin/go /usr/local/bin/go
-rm -rf go1.20.1.linux-arm64.tar.gz
+rm -rf go1.23.2.linux-arm64.tar.gz
 msg_ok "Installed Golang"
 
 msg_info "Installing RTSPtoWeb"

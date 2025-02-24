@@ -3,8 +3,7 @@
 import React, { useEffect, useState } from "react";
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
-import { string } from "zod";
-
+import ApplicationChart from "../../components/ApplicationChart";
 
 interface DataModel {
   id: number;
@@ -12,17 +11,16 @@ interface DataModel {
   disk_size: number;
   core_count: number;
   ram_size: number;
-  verbose: string;
   os_type: string;
   os_version: string;
-  hn: string;
   disableip6: string;
-  ssh: string;
-  tags: string;
   nsapp: string;
   created_at: string;
   method: string;
   pve_version: string;
+  status: string;
+  error: string;
+  type: string;
 }
 
 
@@ -34,8 +32,11 @@ const DataFetcher: React.FC = () => {
   const [startDate, setStartDate] = useState<Date | null>(null);
   const [endDate, setEndDate] = useState<Date | null>(null);
   const [sortConfig, setSortConfig] = useState<{ key: keyof DataModel | null, direction: 'ascending' | 'descending' }>({ key: 'id', direction: 'descending' });
-  const [itemsPerPage, setItemsPerPage] = useState(5);
+  const [itemsPerPage, setItemsPerPage] = useState(25);
   const [currentPage, setCurrentPage] = useState(1);
+
+  const [showErrorRow, setShowErrorRow] = useState<number | null>(null);
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -115,9 +116,27 @@ const DataFetcher: React.FC = () => {
 
   const paginatedData = sortedData.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
+
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
 
+  var installingCounts: number = 0;
+  var failedCounts: number = 0;
+  var doneCounts: number = 0
+  var unknownCounts: number = 0;
+  data.forEach((item) => {
+    if (item.status === "installing") {
+      installingCounts += 1;
+    } else if (item.status === "failed") {
+      failedCounts += 1;
+    }
+    else if (item.status === "done") {
+      doneCounts += 1;
+    }
+    else {
+      unknownCounts += 1;
+    }
+  });
 
   return (
     <div className="p-6 mt-20">
@@ -159,13 +178,15 @@ const DataFetcher: React.FC = () => {
           <label className="text-sm text-gray-600 mt-1 block">Set a end date</label>
         </div>
       </div>
+      <ApplicationChart data={filteredData} />
       <div className="mb-4 flex justify-between items-center">
         <p className="text-lg font-bold">{filteredData.length} results found</p>
+        <p className="text-lg font">Status Legend: 🔄 installing {installingCounts} | ✔️ completetd {doneCounts} | ❌ failed {failedCounts} | ❓ unknown {unknownCounts}</p>
         <select value={itemsPerPage} onChange={handleItemsPerPageChange} className="p-2 border">
-          <option value={5}>5</option>
-          <option value={10}>10</option>
-          <option value={20}>20</option>
+          <option value={25}>25</option>
           <option value={50}>50</option>
+          <option value={100}>100</option>
+          <option value={200}>200</option>
         </select>
       </div>
       <div className="overflow-x-auto">
@@ -173,36 +194,63 @@ const DataFetcher: React.FC = () => {
           <table className="min-w-full table-auto border-collapse">
             <thead>
               <tr>
+                <th className="px-4 py-2 border-b cursor-pointer" onClick={() => requestSort('status')}>Status</th>
+                <th className="px-4 py-2 border-b cursor-pointer" onClick={() => requestSort('type')}>Type</th>
                 <th className="px-4 py-2 border-b cursor-pointer" onClick={() => requestSort('nsapp')}>Application</th>
                 <th className="px-4 py-2 border-b cursor-pointer" onClick={() => requestSort('os_type')}>OS</th>
                 <th className="px-4 py-2 border-b cursor-pointer" onClick={() => requestSort('os_version')}>OS Version</th>
                 <th className="px-4 py-2 border-b cursor-pointer" onClick={() => requestSort('disk_size')}>Disk Size</th>
                 <th className="px-4 py-2 border-b cursor-pointer" onClick={() => requestSort('core_count')}>Core Count</th>
                 <th className="px-4 py-2 border-b cursor-pointer" onClick={() => requestSort('ram_size')}>RAM Size</th>
-                <th className="px-4 py-2 border-b cursor-pointer" onClick={() => requestSort('hn')}>Hostname</th>
-                <th className="px-4 py-2 border-b cursor-pointer" onClick={() => requestSort('ssh')}>SSH</th>
-                <th className="px-4 py-2 border-b cursor-pointer" onClick={() => requestSort('verbose')}>Verb</th>
-                <th className="px-4 py-2 border-b cursor-pointer" onClick={() => requestSort('tags')}>Tags</th>
                 <th className="px-4 py-2 border-b cursor-pointer" onClick={() => requestSort('method')}>Method</th>
                 <th className="px-4 py-2 border-b cursor-pointer" onClick={() => requestSort('pve_version')}>PVE Version</th>
+                <th className="px-4 py-2 border-b cursor-pointer" onClick={() => requestSort('error')}>Error Message</th>
                 <th className="px-4 py-2 border-b cursor-pointer" onClick={() => requestSort('created_at')}>Created At</th>
               </tr>
             </thead>
             <tbody>
               {paginatedData.map((item, index) => (
                 <tr key={index}>
+                  <td className="px-4 py-2 border-b">
+                    {item.status === "done" ? (
+                      "✔️"
+                    ) : item.status === "failed" ? (
+                      "❌"
+                    ) : item.status === "installing" ? (
+                      "🔄"
+                    ) : (
+                      item.status
+                    )}
+                  </td>
+                  <td className="px-4 py-2 border-b">{item.type === "lxc" ? (
+                    "📦"
+                  ) : item.type === "vm" ? (
+                    "🖥️"
+                  ) : (
+                    item.type
+                  )}</td>
                   <td className="px-4 py-2 border-b">{item.nsapp}</td>
                   <td className="px-4 py-2 border-b">{item.os_type}</td>
                   <td className="px-4 py-2 border-b">{item.os_version}</td>
                   <td className="px-4 py-2 border-b">{item.disk_size}</td>
                   <td className="px-4 py-2 border-b">{item.core_count}</td>
                   <td className="px-4 py-2 border-b">{item.ram_size}</td>
-                  <td className="px-4 py-2 border-b">{item.hn}</td>
-                  <td className="px-4 py-2 border-b">{item.ssh}</td>
-                  <td className="px-4 py-2 border-b">{item.verbose}</td>
-                  <td className="px-4 py-2 border-b">{item.tags.replace(/;/g, ' ')}</td>
                   <td className="px-4 py-2 border-b">{item.method}</td>
                   <td className="px-4 py-2 border-b">{item.pve_version}</td>
+                  <td className="px-4 py-2 border-b">
+                    {item.error && item.error !== "none" ? (
+                      showErrorRow === index ? (
+                        <>
+                          {item.error}
+                          <button onClick={() => setShowErrorRow(null)}>{item.error}</button>
+                        </>
+                      ) : (
+                        <button onClick={() => setShowErrorRow(index)}>Click to show error</button>
+                      )
+                    ) : (
+                      "none"
+                    )}
+                  </td>
                   <td className="px-4 py-2 border-b">{formatDate(item.created_at)}</td>
                 </tr>
               ))}

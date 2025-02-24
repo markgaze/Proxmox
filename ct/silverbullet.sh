@@ -5,7 +5,6 @@ source <(curl -s https://raw.githubusercontent.com/asylumexp/Proxmox/main/misc/b
 # License: MIT | https://github.com/asylumexp/Proxmox/raw/main/LICENSE
 # Source: https://silverbullet.md
 
-# App default values
 APP="Silverbullet"
 var_tags="notes"
 var_cpu="1"
@@ -14,11 +13,7 @@ var_ram="512"
 var_os="debian"
 var_version="12"
 
-# App Output & Base Settings
 header_info "${APP}"
-base_settings
-
-# Core
 variables
 color
 catch_errors

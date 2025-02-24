@@ -4,21 +4,16 @@ source <(curl -s https://raw.githubusercontent.com/asylumexp/Proxmox/main/misc/b
 # Author: tteck (tteckster)
 # License: MIT | https://github.com/asylumexp/Proxmox/raw/main/LICENSE
 
-# App Default Values
 APP="Grist"
 var_tags="database;spreadsheet"
-var_cpu="1"
-var_ram="2048"
-var_disk="4"
+var_cpu="2"
+var_ram="3072"
+var_disk="6"
 var_os="debian"
 var_version="12"
 var_unprivileged="1"
 
-# App Output & Base Settings
 header_info "$APP"
-base_settings
-
-# Core
 variables
 color
 catch_errors
@@ -41,18 +36,36 @@ function update_script() {
     msg_ok "Stopped ${APP} Service"
 
     msg_info "Updating ${APP} to v${RELEASE}"
+
     cd /opt
     rm -rf grist_bak
     mv grist grist_bak
     wget -q https://github.com/gristlabs/grist-core/archive/refs/tags/v${RELEASE}.zip
     unzip -q v$RELEASE.zip
     mv grist-core-${RELEASE} grist
-    cp -n /opt/grist_bak/.env /opt/grist/.env
+
+    mkdir -p grist/docs
+
+    cp -n grist_bak/.env grist/.env || true
+    cp -r grist_bak/docs/* grist/docs/ || true
+    cp grist_bak/grist-sessions.db grist/grist-sessions.db || true
+    cp grist_bak/landing.db grist/landing.db || true
+
     cd grist
+    msg_info "Installing Dependencies"
     yarn install >/dev/null 2>&1
+    msg_ok "Installed Dependencies"
+
+    msg_info "Building"
     yarn run build:prod >/dev/null 2>&1
+    msg_ok "Done building"
+
+    msg_info "Installing Python"
     yarn run install:python >/dev/null 2>&1
+    msg_ok "Installed Python"
+
     echo "${RELEASE}" >/opt/${APP}_version.txt
+
     msg_ok "Updated ${APP} to v${RELEASE}"
 
     msg_info "Starting ${APP} Service"

@@ -14,17 +14,17 @@
     "logo": "https://raw.githubusercontent.com/home-assistant/brands/master/core_integrations/proxmoxve/icon.png",
     "description": "The Proxmox Datacenter Manager project has been developed with the objective of providing a centralized overview of all your individual nodes and clusters. It also enables basic management like migrations of virtual guests without any cluster network requirements. ",
     "install_methods": [
-        {
-            "type": "default",
-            "script": "ct/proxmox-datacenter-manager.sh",
-            "resources": {
-                "cpu": 2,
-                "ram": 2048,
-                "hdd": 10,
-                "os": "Debian",
-                "version": "12"
-            }
+      {
+        "type": "default",
+        "script": "ct/proxmox-datacenter-manager.sh",
+        "resources": {
+          "cpu": 2,
+          "ram": 2048,
+          "hdd": 10,
+          "os": "debian",
+          "version": "12"
         }
+    }
     ],
     "default_credentials": {
         "username": null,

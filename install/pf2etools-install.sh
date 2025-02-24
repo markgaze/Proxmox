@@ -2,7 +2,7 @@
 
 # Copyright (c) 2021-2025 community-scripts ORG
 # Author: TheRealVira
-# License: MIT
+# License: MIT | https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
 # Source: https://pf2etools.com/
 
 # Import Functions und Setup
@@ -30,7 +30,7 @@ msg_ok "Installed Dependencies"
 msg_info "Setting up Node.js Repository"
 mkdir -p /etc/apt/keyrings
 curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
-echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_20.x nodistro main" >/etc/apt/sources.list.d/nodesource.list
+echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_22.x nodistro main" >/etc/apt/sources.list.d/nodesource.list
 msg_ok "Set up Node.js Repository"
 
 msg_info "Installing Node.js"
@@ -38,7 +38,6 @@ $STD apt-get update
 $STD apt-get install -y nodejs
 msg_ok "Installed Node.js"
 
-# Setup App
 msg_info "Setup Pf2eTools"
 cd /opt
 RELEASE=$(curl -s https://api.github.com/repos/Pf2eToolsOrg/Pf2eTools/releases/latest | grep "tag_name" | awk '{print substr($2, 2, length($2)-3) }')
@@ -48,7 +47,6 @@ mv "Pf2eTools-${RELEASE:1}" /opt/Pf2eTools
 cd /opt/Pf2eTools
 $STD npm install
 $STD npm run build
-cd ~
 echo "${RELEASE}" >/opt/Pf2eTools_version.txt
 msg_ok "Set up Pf2eTools"
 
@@ -66,7 +64,6 @@ chown -R www-data: "/opt/Pf2eTools"
 chmod -R 755 "/opt/Pf2eTools"
 msg_ok "Created Service"
 
-# Cleanup
 msg_info "Cleaning up"
 rm -rf /opt/${RELEASE}.zip
 $STD apt-get -y autoremove

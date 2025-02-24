@@ -5,7 +5,6 @@ source <(curl -s https://raw.githubusercontent.com/asylumexp/Proxmox/main/misc/b
 # License: MIT | https://github.com/asylumexp/Proxmox/raw/main/LICENSE
 # Source: https://frigate.video/
 
-# App Default Values
 APP="Frigate"
 var_tags="nvr"
 var_cpu="4"
@@ -15,11 +14,7 @@ var_os="debian"
 var_version="11"
 var_unprivileged="0"
 
-# App Output & Base Settings
 header_info "$APP"
-base_settings
-
-# Core
 variables
 color
 catch_errors

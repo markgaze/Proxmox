@@ -27,7 +27,7 @@ msg_ok "Setup Python3"
 msg_info "Installing Node.js"
 mkdir -p /etc/apt/keyrings
 curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
-echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_20.x nodistro main" >/etc/apt/sources.list.d/nodesource.list
+echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_22.x nodistro main" >/etc/apt/sources.list.d/nodesource.list
 $STD apt-get update
 $STD apt-get install -y nodejs
 msg_ok "Installed Node.js"
@@ -49,13 +49,13 @@ if [[ "$CTTYPE" == "0" ]]; then
 fi
 msg_ok "Set Up Hardware Acceleration"
 
-RELEASE=$(curl -s https://api.github.com/repos/blakeblackshear/frigate/releases/latest | jq -r '.tag_name')
+#RELEASE=$(curl -s https://api.github.com/repos/blakeblackshear/frigate/releases/latest | jq -r '.tag_name')
 msg_ok "Stop spinner to prevent segmentation fault"
-msg_info "Installing Frigate $RELEASE (Perseverance)"
+msg_info "Installing Frigate v0.14.1 (Perseverance)"
 if [ -n "$SPINNER_PID" ] && ps -p $SPINNER_PID > /dev/null; then kill $SPINNER_PID > /dev/null; fi
 cd ~
 mkdir -p /opt/frigate/models
-wget -q https://github.com/blakeblackshear/frigate/archive/refs/tags/${RELEASE}.tar.gz -O frigate.tar.gz
+wget -q https://github.com/blakeblackshear/frigate/archive/refs/tags/v0.14.1.tar.gz -O frigate.tar.gz
 tar -xzf frigate.tar.gz -C /opt/frigate --strip-components 1
 rm -rf frigate.tar.gz
 cd /opt/frigate
@@ -103,7 +103,7 @@ else
   sed -i -e 's/^kvm:x:104:$/render:x:104:frigate/' -e 's/^render:x:105:$/kvm:x:105:/' /etc/group
 fi
 echo "tmpfs   /tmp/cache      tmpfs   defaults        0       0" >> /etc/fstab
-msg_ok "Installed Frigate $RELEASE"
+msg_ok "Installed Frigate"
 
 if grep -q -o -m1 -E 'avx[^ ]*' /proc/cpuinfo; then
   msg_ok "AVX Support Detected"

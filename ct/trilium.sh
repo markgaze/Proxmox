@@ -5,7 +5,6 @@ source <(curl -s https://raw.githubusercontent.com/asylumexp/Proxmox/main/misc/b
 # License: MIT | https://github.com/asylumexp/Proxmox/raw/main/LICENSE
 # Source: https://triliumnext.github.io/Docs/
 
-# App Default Values
 APP="Trilium"
 var_tags="notes"
 var_cpu="1"
@@ -15,11 +14,7 @@ var_os="debian"
 var_version="12"
 var_unprivileged="1"
 
-# App Output & Base Settings
 header_info "$APP"
-base_settings
-
-# Core
 variables
 color
 catch_errors
@@ -32,29 +27,40 @@ function update_script() {
         msg_error "No ${APP} Installation Found!"
         exit
     fi
+    if [[ ! -f /opt/${APP}_version.txt ]]; then touch /opt/${APP}_version.txt; fi
     RELEASE=$(curl -s https://api.github.com/repos/TriliumNext/Notes/releases/latest | grep "tag_name" | awk '{print substr($2, 2, length($2)-3) }')
-
+    if [[ "${RELEASE}" != "$(cat /opt/${APP}_version.txt)" ]] || [[ ! -f /opt/${APP}_version.txt ]]; then
     msg_info "Stopping ${APP}"
-    systemctl stop trilium.service
+    systemctl stop trilium
     sleep 1
     msg_ok "Stopped ${APP}"
 
     msg_info "Updating to ${RELEASE}"
-    wget -q https://github.com/TriliumNext/Notes/releases/download/${RELEASE}/TriliumNextNotes-${RELEASE}-server-linux-x64.tar.xz
-    tar -xf TriliumNextNotes-${RELEASE}-server-linux-x64.tar.xz
-    cp -r trilium-linux-x64-server/* /opt/trilium/
+    mkdir -p /opt/trilium_backup
+    mv /opt/trilium/{db,dump-db} /opt/trilium_backup/
+    rm -rf /opt/trilium
+    cd /tmp
+    wget -q https://github.com/TriliumNext/Notes/releases/download/${RELEASE}/TriliumNextNotes-linux-x64-${RELEASE}.tar.xz
+    tar -xf TriliumNextNotes-linux-x64-${RELEASE}.tar.xz
+    mv trilium-linux-x64-server /opt/trilium
+    cp -r /opt/trilium_backup/{db,dump-db} /opt/trilium/
+    echo "${RELEASE}" >/opt/${APP}_version.txt
     msg_ok "Updated to ${RELEASE}"
 
     msg_info "Cleaning up"
-    rm -rf TriliumNextNotes-${RELEASE}-server-linux-x64.tar.xz trilium-linux-x64-server
+    rm -rf /tmp/TriliumNextNotes-linux-x64-${RELEASE}.tar.xz 
+    rm -rf /opt/trilium_backup
     msg_ok "Cleaned"
 
     msg_info "Starting ${APP}"
-    systemctl start trilium.service
+    systemctl start trilium
     sleep 1
     msg_ok "Started ${APP}"
     msg_ok "Updated Successfully"
-    exit
+  else
+    msg_ok "No update required. ${APP} is already at ${RELEASE}"
+  fi
+  exit
 }
 
 start

@@ -18,9 +18,9 @@
             "type": "default",
             "script": "ct/wikijs.sh",
             "resources": {
-                "cpu": 1,
-                "ram": 512,
-                "hdd": 3,
+                "cpu": 2,
+                "ram": 2048,
+                "hdd": 7,
                 "os": "debian",
                 "version": "12"
             }

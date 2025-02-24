@@ -3,8 +3,8 @@ source <(curl -s https://raw.githubusercontent.com/asylumexp/Proxmox/main/misc/b
 # Copyright (c) 2021-2024 tteck
 # Author: tteck (tteckster)
 # License: MIT | https://github.com/asylumexp/Proxmox/raw/main/LICENSE
+# Source: https://alpinelinux.org/
 
-# App Default Values
 APP="Alpine"
 var_tags="os;alpine"
 var_cpu="1"
@@ -14,11 +14,7 @@ var_os="alpine"
 var_version="3.21"
 var_unprivileged="1"
 
-# App Output & Base Settings
 header_info "$APP"
-base_settings
-
-# Core
 variables
 color
 catch_errors

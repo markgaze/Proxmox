@@ -5,21 +5,16 @@ source <(curl -s https://raw.githubusercontent.com/asylumexp/Proxmox/main/misc/b
 # License: MIT | https://github.com/asylumexp/Proxmox/raw/main/LICENSE
 # Source: https://hoarder.app/
 
-# App Default Values
 APP="Hoarder"
 var_tags="bookmark"
 var_cpu="2"
 var_ram="4096"
-var_disk="8"
+var_disk="10"
 var_os="debian"
 var_version="12"
 var_unprivileged="1"
 
-# App Output & Base Settings
 header_info "$APP"
-base_settings
-
-# Core
 variables
 color
 catch_errors
@@ -39,6 +34,9 @@ function update_script() {
     systemctl stop hoarder-web hoarder-workers hoarder-browser
     msg_ok "Stopped Services"
     msg_info "Updating ${APP} to v${RELEASE}"
+    if [[ $(corepack -v) < "0.31.0" ]]; then
+      npm install -g corepack@0.31.0 &>/dev/null
+    fi
     cd /opt
     if [[ -f /opt/hoarder/.env ]] && [[ ! -f /etc/hoarder/hoarder.env ]]; then
       mkdir -p /etc/hoarder

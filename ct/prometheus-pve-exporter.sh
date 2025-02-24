@@ -5,7 +5,6 @@ source <(curl -s https://raw.githubusercontent.com/community-scripts/ProxmoxVE/m
 # License: MIT | https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
 # Source: https://github.com/prometheus-pve/prometheus-pve-exporter
 
-# App Default Values
 APP="Prometheus-PVE-Exporter"
 var_tags="monitoring"
 var_cpu="1"
@@ -15,11 +14,7 @@ var_os="debian"
 var_version="12"
 var_unprivileged="1"
 
-# App Output & Base Settings
 header_info "$APP"
-base_settings
-
-# Core
 variables
 color
 catch_errors
@@ -37,7 +32,7 @@ function update_script() {
     msg_ok "Stopped ${APP}"
 
     msg_info "Updating ${APP}"
-    pip install prometheus-pve-exporter --upgrade --root-user-action=ignore &>/dev/null
+    pip install prometheus-pve-exporter --default-timeout=300 --upgrade --root-user-action=ignore &>/dev/null
     msg_ok "Updated ${APP}"
 
     msg_info "Starting ${APP}"

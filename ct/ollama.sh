@@ -5,7 +5,6 @@ source <(curl -s https://raw.githubusercontent.com/asylumexp/Proxmox/main/misc/b
 # License: MIT | https://github.com/asylumexp/Proxmox/raw/main/LICENSE
 # Source: https://ollama.com/
 
-# App Default Values
 APP="Ollama"
 var_tags="ai"
 var_cpu="4"
@@ -14,11 +13,7 @@ var_disk="24"
 var_os="ubuntu"
 var_version="22.04"
 
-# App Output & Base Settings
 header_info "$APP"
-base_settings
-
-# Core
 variables
 color
 catch_errors

@@ -24,12 +24,10 @@ $STD apt-get install -y openssh-server
 msg_ok "Installed Dependencies"
 
 msg_info "Installing Golang"
-set +o pipefail
-RELEASE=$(curl -s https://go.dev/dl/ | grep -o "go.*\linux-arm64.tar.gz" | head -n 1)
-wget -q https://golang.org/dl/$RELEASE
-tar -xzf $RELEASE -C /usr/local
+$STD wget https://golang.org/dl/go1.23.2.linux-arm64.tar.gz
+$STD tar -xzf go1.23.2.linux-arm64.tar.gz -C /usr/local
 $STD ln -s /usr/local/go/bin/go /usr/local/bin/go
-set -o pipefail
+rm -rf go1.23.2.linux-arm64.tar.gz
 msg_ok "Installed Golang"
 
 msg_info "Installing SFTPGo"

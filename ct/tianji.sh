@@ -5,7 +5,6 @@ source <(curl -s https://raw.githubusercontent.com/asylumexp/Proxmox/main/misc/b
 # License: MIT | https://github.com/asylumexp/Proxmox/raw/main/LICENSE
 # Source: https://tianji.msgbyte.com/
 
-# App Default Values
 APP="Tianji"
 var_tags="monitoring"
 var_cpu="4"
@@ -15,11 +14,7 @@ var_os="debian"
 var_version="12"
 var_unprivileged="1"
 
-# App Output & Base Settings
 header_info "$APP"
-base_settings
-
-# Core
 variables
 color
 catch_errors
@@ -45,6 +40,7 @@ function update_script() {
     unzip -q v${RELEASE}.zip
     mv tianji-${RELEASE} /opt/tianji
     cd tianji
+    export NODE_OPTIONS="--max_old_space_size=4096"
     pnpm install --filter @tianji/client... --config.dedupe-peer-dependents=false --frozen-lockfile >/dev/null 2>&1
     pnpm build:static >/dev/null 2>&1
     pnpm install --filter @tianji/server... --config.dedupe-peer-dependents=false >/dev/null 2>&1

@@ -17,6 +17,13 @@ jobs:
       pull-requests: write
 
     steps:
+      - name: Generate a token
+        id: generate-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ vars.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+
       # Step 1: Checkout repository
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -71,7 +78,27 @@ jobs:
                        --base main \
                        --label "automated pr"
         env:
+          GH_TOKEN: ${{ steps.generate-token.outputs.token }}
+      
+      - name: Approve pull request
+        if: env.changed == 'true'
+        env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          PR_NUMBER=$(gh pr list --head "pr-update-app-files" --json number --jq '.[].number')
+          if [ -n "$PR_NUMBER" ]; then
+            gh pr review $PR_NUMBER --approve
+          fi
+          
+      - name: Re-approve pull request after update
+        if: env.changed == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          PR_NUMBER=$(gh pr list --head "pr-update-app-files" --json number --jq '.[].number')
+          if [ -n "$PR_NUMBER" ]; then
+            gh pr review $PR_NUMBER --approve
+          fi
 
       # Step 8: Output success message when no changes
       - name: No changes detected
