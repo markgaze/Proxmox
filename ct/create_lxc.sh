@@ -184,6 +184,8 @@ else
     TEMPLATE_VARIENT=focal
   elif [ $PCT_OSVERSION = 24.04 ]; then
     TEMPLATE_VARIENT=noble
+  elif [ $PCT_OSVERSION = 24.10 ]; then
+    TEMPLATE_VARIENT=oracular
   else
     TEMPLATE_VARIENT=jammy
   fi
