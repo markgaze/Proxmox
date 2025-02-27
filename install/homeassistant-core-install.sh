@@ -14,6 +14,7 @@ network_check
 update_os
 
 msg_info "Installing Dependencies (Patience)"
+curl -O http://ports.ubuntu.com/pool/main/t/tiff/libtiff6_4.5.1+git230720-4ubuntu4_arm64.deb && dpkg -i libtiff6_4.5.1+git230720-4ubuntu4_arm64.deb & rm libtiff6_4.5.1+git230720-4ubuntu4_arm64.deb
 $STD apt-get install -y \
   curl \
   git \
@@ -22,7 +23,6 @@ $STD apt-get install -y \
   gnupg \
   ca-certificates \
   bluez \
-  libtiff6 \
   tzdata \
   libffi-dev \
   libssl-dev \
