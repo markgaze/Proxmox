@@ -14,7 +14,9 @@ network_check
 update_os
 
 msg_info "Installing Dependencies (Patience)"
-curl -O http://ports.ubuntu.com/pool/main/t/tiff/libtiff6_4.5.1+git230720-4ubuntu4_arm64.deb && dpkg -i libtiff6_4.5.1+git230720-4ubuntu4_arm64.deb & rm libtiff6_4.5.1+git230720-4ubuntu4_arm64.deb
+$STD apt-get install curl
+$STD curl -O http://ports.ubuntu.com/pool/main/t/tiff/libtiff6_4.5.1+git230720-4ubuntu4_arm64.deb && apt install ./libtiff6_4.5.1+git230720-4ubuntu4_arm64.deb && rm libtiff6_4.5.1+git230720-4ubuntu4_arm64.deb
+$STD apt --fix-broken install -y
 $STD apt-get install -y \
   curl \
   git \
