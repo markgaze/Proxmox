@@ -46,7 +46,7 @@ After=network-online.target
 [Service]
 User=root
 WorkingDirectory=/opt/zwave-js-ui
-ExecStart=/opt/zwave-js-ui/zwave-js-ui-linux
+ExecStart=/opt/zwave-js-ui/zwave-js-ui
 EnvironmentFile=/opt/.env
 
 [Install]
