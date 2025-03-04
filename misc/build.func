@@ -1,7 +1,7 @@
 # Copyright (c) 2021-2025 tteck
 # Author: tteck (tteckster)
 # License: MIT
-# https://github.com/balves42/Proxmox/raw/main/LICENSE
+# https://github.com/asylumexp/Proxmox/raw/main/LICENSE
 
 variables() {
   NSAPP=$(echo ${APP,,} | tr -d ' ') # This function sets the NSAPP variable by converting the value of the APP variable to lowercase and removing any spaces.
@@ -202,7 +202,7 @@ maxkeys_check() {
 arch_check() {
   if [ "$(dpkg --print-architecture)" != "arm64" ]; then
     echo -e "\n ${INFO}${YWB}This script will not work on non arm64 systems! \n"
-    echo -e "\n ${YWB}Visit https://github.com/balves42/Proxmox for AMD64 support. \n"
+    echo -e "\n ${YWB}Visit https://github.com/asylumexp/Proxmox for AMD64 support. \n"
     echo -e "Exiting..."
     sleep 2
     exit
@@ -1029,9 +1029,9 @@ build_container() {
   TEMP_DIR=$(mktemp -d)
   pushd $TEMP_DIR >/dev/null
   if [ "$var_os" == "alpine" ]; then
-    export FUNCTIONS_FILE_PATH="$(curl -s https://raw.githubusercontent.com/balves42/Proxmox/main/misc/alpine-install.func)"
+    export FUNCTIONS_FILE_PATH="$(curl -s https://raw.githubusercontent.com/asylumexp/Proxmox/main/misc/alpine-install.func)"
   else
-    export FUNCTIONS_FILE_PATH="$(curl -s https://raw.githubusercontent.com/balves42/Proxmox/main/misc/install.func)"
+    export FUNCTIONS_FILE_PATH="$(curl -s https://raw.githubusercontent.com/asylumexp/Proxmox/main/misc/install.func)"
   fi
   export RANDOM_UUID="$RANDOM_UUID"
   export CACHER="$APT_CACHER"
@@ -1063,7 +1063,7 @@ build_container() {
     $PW
   "
   # This executes create_lxc.sh and creates the container and .conf file
-  bash -c "$(wget -qLO - https://raw.githubusercontent.com/balves42/Proxmox/main/ct/create_lxc.sh)" || exit $?
+  bash -c "$(wget -qLO - https://raw.githubusercontent.com/asylumexp/Proxmox/main/ct/create_lxc.sh)" || exit $?
 
   LXC_CONFIG=/etc/pve/lxc/${CTID}.conf
   if [ "$CT_TYPE" == "0" ]; then
@@ -1125,7 +1125,7 @@ http://dl-cdn.alpinelinux.org/alpine/latest-stable/community
 EOF'
     pct exec "$CTID" -- ash -c "apk add bash >/dev/null"
   fi
-  lxc-attach -n "$CTID" -- bash -c "$(wget -qLO - https://raw.githubusercontent.com/balves42/Proxmox/main/install/$var_install.sh)" || exit $?
+  lxc-attach -n "$CTID" -- bash -c "$(wget -qLO - https://raw.githubusercontent.com/asylumexp/Proxmox/main/install/$var_install.sh)" || exit $?
 
 }
 
@@ -1138,7 +1138,7 @@ description() {
     cat <<EOF
 <div align='center'>
   <a href='https://pimox-scripts.com' target='_blank' rel='noopener noreferrer'>
-    <img src='https://raw.githubusercontent.com/balves42/ProxmoxVE/main/misc/images/logo-81x112.png' alt='Logo' style='width:81px;height:112px;'/>
+    <img src='https://raw.githubusercontent.com/asylumexp/ProxmoxVE/main/misc/images/logo-81x112.png' alt='Logo' style='width:81px;height:112px;'/>
   </a>
 
   <h2 style='font-size: 24px; margin: 20px 0;'>${APP} LXC</h2>
@@ -1151,15 +1151,15 @@ description() {
   
   <span style='margin: 0 10px;'>
     <i class="fa fa-github fa-fw" style="color: #f5f5f5;"></i>
-    <a href='https://github.com/balves42/Proxmox' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>GitHub</a>
+    <a href='https://github.com/asylumexp/Proxmox' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>GitHub</a>
   </span>
   <span style='margin: 0 10px;'>
     <i class="fa fa-comments fa-fw" style="color: #f5f5f5;"></i>
-    <a href='https://github.com/balves42/Proxmox/discussions' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>Discussions</a>
+    <a href='https://github.com/asylumexp/Proxmox/discussions' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>Discussions</a>
   </span>
   <span style='margin: 0 10px;'>
     <i class="fa fa-exclamation-circle fa-fw" style="color: #f5f5f5;"></i>
-    <a href='https://github.com/balves42/Proxmox/issues' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>Issues</a>
+    <a href='https://github.com/asylumexp/Proxmox/issues' target='_blank' rel='noopener noreferrer' style='text-decoration: none; color: #00617f;'>Issues</a>
   </span>
 </div>
 EOF
