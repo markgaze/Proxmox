@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
-source <(curl -s https://raw.githubusercontent.com/balves42/Proxmox/main/misc/build.func)
+source <(curl -s https://raw.githubusercontent.com/asylumexp/Proxmox/main/misc/build.func)
 # Copyright (c) 2021-2025 tteck
 # Author: tteck (tteckster)
-# License: MIT | https://github.com/balves42/Proxmox/raw/main/LICENSE
+# License: MIT | https://github.com/asylumexp/Proxmox/raw/main/LICENSE
 # Source: https://nginxproxymanager.com/
 
 APP="Nginx Proxy Manager"
 var_tags="proxy"
 var_cpu="2"
 var_ram="1024"
-var_disk="15"
+var_disk="12"
 var_os="debian"
 var_version="12"
 var_unprivileged="1"
