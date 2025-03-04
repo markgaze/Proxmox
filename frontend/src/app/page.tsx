@@ -116,19 +116,15 @@ export default function Page() {
 								Make managing your Homelab a breeze
 							</h1>
 							<div className="max-w-2xl gap-2 flex flex-col text-center sm:text-lg text-sm leading-relaxed tracking-tight text-muted-foreground md:text-xl">
-                <p>
-              This project aims to take the community-made Proxmox Helper Scripts, originally started by tteck, and port it to arm64.
-              <br />
-              <br />
-              Originally created by{" "}
-              <a href="https://github.com/tteck" target="_blank">
-                tteck
-              </a>
-              , these scripts automate and streamline
-              <br />
-              the process of creating and configuring Linux containers (LXC) and
-              virtual machines (VMs) on Proxmox VE.
-            </p>
+								<p>
+									We are a community-driven initiative that simplifies the setup
+									of Proxmox Virtual Environment (VE).
+								</p>
+								<p>
+									With 300+ scripts to help you manage your{" "}
+									<b>Proxmox VE environment</b>. Whether you&#39;re a seasoned
+									user or a newcomer, we&#39;ve got you covered.
+								</p>
 							</div>
 						</div>
 						<div className="flex flex-row gap-3">
