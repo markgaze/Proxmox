@@ -1,11 +1,3 @@
-# Nginx Proxy Manager on ARM64 Proxmox
-
-This fork contains fixes related to the install of Nginx Proxy Manager such as:
-* Installation of missing golang dependency
-* HD Space insufficent for compilation and upgraded from 4GB to 15GB (change it if you find it overkill)
-* Arm64 fix on openresty dependency
-<h1 align="center"></h1>
-
 <div align="center">
   <a href="#">
     <img src="https://raw.githubusercontent.com/asylumexp/Proxmox/main/misc/images/logo.png" height="100px" />
