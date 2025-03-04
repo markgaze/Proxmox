@@ -27,7 +27,7 @@ post_to_api() {
     "disk_size": $DISK_SIZE,
     "core_count": $CORE_COUNT,
     "ram_size": $RAM_SIZE,
-    "os_type": "$var_os",
+    "os_type": "$var_os-arm64",
     "os_version": "$var_version",
     "disableip6": "$DISABLEIP6",
     "nsapp": "$NSAPP",
