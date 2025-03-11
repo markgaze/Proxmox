@@ -28,7 +28,6 @@ function Navbar() {
     };
   }, []);
   return (
-			<>
 				<div
 					className={`fixed left-0 top-0 z-50 flex w-screen justify-center px-4 xl:px-0 ${
 						isScrolled ? "glass border-b bg-background/50" : ""
@@ -53,22 +52,16 @@ function Navbar() {
 							<CommandMenu />
 							<StarOnGithubButton />
 							{navbarLinks.map(({ href, event, icon, text }) => (
-								<TooltipProvider key={event}>
-											<Button variant="ghost" size={"icon"} asChild>
-												<Link
-													target="_blank"
-													href={href}
-													data-umami-event={event}
-												>
-													{icon}
-													<span className="sr-only">{text}</span>
-												</Link>
-											</Button>
-										<TooltipContent side="bottom" className="text-xs">
-											{text}
-										</TooltipContent>
-									</Tooltip>
-								</TooltipProvider>
+								<Button variant="ghost" size={"icon"} asChild>
+									<Link
+										target="_blank"
+										href={href}
+										data-umami-event={event}
+									>
+										{icon}
+										<span className="sr-only">{text}</span>
+									</Link>
+								</Button>
 							))}
 							<ThemeToggle />
 						</div>
