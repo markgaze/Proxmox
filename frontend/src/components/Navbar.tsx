@@ -52,12 +52,8 @@ function Navbar() {
 						<div className="flex gap-2">
 							<CommandMenu />
 							<StarOnGithubButton />
-							{navbarLinks.map(({ href, event, icon, text, mobileHidden }) => (
+							{navbarLinks.map(({ href, event, icon, text }) => (
 								<TooltipProvider key={event}>
-									<Tooltip delayDuration={100}>
-										<TooltipTrigger
-											className={mobileHidden ? "hidden lg:block" : ""}
-										>
 											<Button variant="ghost" size={"icon"} asChild>
 												<Link
 													target="_blank"
@@ -68,7 +64,6 @@ function Navbar() {
 													<span className="sr-only">{text}</span>
 												</Link>
 											</Button>
-										</TooltipTrigger>
 										<TooltipContent side="bottom" className="text-xs">
 											{text}
 										</TooltipContent>
