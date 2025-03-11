@@ -26,7 +26,7 @@ msg_info "Setup RustDesk"
 RELEASE=$(curl -s https://api.github.com/repos/rustdesk/rustdesk-server/releases/latest | grep "tag_name" | awk '{print substr($2, 2, length($2)-3) }')
 TEMPDIR=$(mktemp -d)
 wget -q "https://github.com/rustdesk/rustdesk-server/releases/download/${RELEASE}/rustdesk-server-hbbr_${RELEASE}_arm64.deb" -P $TEMPDIR
-wget -q "https://github.com/rustdesk/rustdesk-server/releases/download/${RELEASE}/rustdesk-server-hbbs_${RELEASE}_arm4.deb" -P $TEMPDIR
+wget -q "https://github.com/rustdesk/rustdesk-server/releases/download/${RELEASE}/rustdesk-server-hbbs_${RELEASE}_arm64.deb" -P $TEMPDIR
 wget -q "https://github.com/rustdesk/rustdesk-server/releases/download/${RELEASE}/rustdesk-server-utils_${RELEASE}_arm64.deb" -P $TEMPDIR
 $STD dpkg -i $TEMPDIR/*.deb
 echo "${RELEASE}" >/opt/rustdesk.txt
