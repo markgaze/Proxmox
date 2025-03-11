@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-source <(curl -s https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/misc/build.func)
+source <(curl -s https://raw.githubusercontent.com/asylumexp/Proxmox/main/misc/build.func)
 # Copyright (c) 2021-2025 community-scripts ORG
 # Author: Slaviša Arežina (tremor021)
 # License: MIT | https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
@@ -37,9 +37,9 @@ function update_script() {
 
         msg_info "Updating $APP to v${RELEASE}"
         TEMPDIR=$(mktemp -d)
-        wget -q "https://github.com/rustdesk/rustdesk-server/releases/download/${RELEASE}/rustdesk-server-hbbr_${RELEASE}_amd64.deb" -P $TEMPDIR
-        wget -q "https://github.com/rustdesk/rustdesk-server/releases/download/${RELEASE}/rustdesk-server-hbbs_${RELEASE}_amd64.deb" -P $TEMPDIR
-        wget -q "https://github.com/rustdesk/rustdesk-server/releases/download/${RELEASE}/rustdesk-server-utils_${RELEASE}_amd64.deb" -P $TEMPDIR
+        wget -q "https://github.com/rustdesk/rustdesk-server/releases/download/${RELEASE}/rustdesk-server-hbbr_${RELEASE}_arm64.deb" -P $TEMPDIR
+        wget -q "https://github.com/rustdesk/rustdesk-server/releases/download/${RELEASE}/rustdesk-server-hbbs_${RELEASE}_arm64.deb" -P $TEMPDIR
+        wget -q "https://github.com/rustdesk/rustdesk-server/releases/download/${RELEASE}/rustdesk-server-utils_${RELEASE}_arm64.deb" -P $TEMPDIR
         $STD dpkg -i $TEMPDIR/*.deb
         msg_ok "Updated $APP to v${RELEASE}"
 
