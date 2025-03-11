@@ -35,5 +35,6 @@
       "text": "After install enable the option \"Use Redis cache\" on the settings page.",
       "type": "info"
     }
-  ]
+  ],
+  "status": "🚧"
 }
