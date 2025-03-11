@@ -1,13 +1,11 @@
 #!/usr/bin/env bash
 
-# Copyright (c) 2021-2024 tteck
-# Author: tteck
-# Co-Author: MickLesk (Canbiz)
-# License: MIT
-# https://github.com/tteck/Proxmox/raw/main/LICENSE
+# Copyright (c) 2021-2025 community-scripts ORG
+# Author: MickLesk (Canbiz)
+# License: MIT | https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
 # Source: https://github.com/matze/wastebin
 
-source /dev/stdin <<< "$FUNCTIONS_FILE_PATH"
+source /dev/stdin <<<"$FUNCTIONS_FILE_PATH"
 color
 verb_ip6
 catch_errors
@@ -58,13 +56,14 @@ ExecStart=/root/.cargo/bin/cargo run --release --quiet
 [Install]
 WantedBy=multi-user.target
 EOF
-systemctl enable -q --now wastebin.service
+systemctl enable -q --now wastebin
 msg_ok "Created Service"
 
 motd_ssh
 customize
 
 msg_info "Cleaning up"
+rm -f $temp_file
 $STD apt-get -y autoremove
 $STD apt-get -y autoclean
 msg_ok "Cleaned"

@@ -2,10 +2,9 @@
 
 # Copyright (c) 2021-2025 community-scripts ORG
 # Author: jkrgr0
-# License: MIT
+# License: MIT | https://github.com/community-scripts/ProxmoxVE/raw/main/LICENSE
 # Source: https://docs.2fauth.app/
 
-# Import Functions und Setup
 source /dev/stdin <<< "$FUNCTIONS_FILE_PATH"
 color
 verb_ip6
@@ -14,7 +13,6 @@ setting_up_container
 network_check
 update_os
 
-# Installing Dependencies with the 3 core dependencies (curl;sudo;mc)
 msg_info "Installing Dependencies"
 $STD apt-get install -y \
   curl \
@@ -28,7 +26,6 @@ $STD apt-get install -y \
   openssh-server
 msg_ok "Installed Dependencies"
 
-# Template: MySQL Database
 msg_info "Setting up Database"
 DB_NAME=2fauth_db
 DB_USER=2fauth
@@ -44,7 +41,6 @@ $STD mysql -u root -e "GRANT ALL ON $DB_NAME.* TO '$DB_USER'@'localhost'; FLUSH 
 } >> ~/2FAuth.creds
 msg_ok "Set up Database"
 
-# Setup App
 msg_info "Setup 2FAuth"
 RELEASE=$(curl -s https://api.github.com/repos/Bubka/2FAuth/releases/latest | grep "tag_name" | awk '{print substr($2, 2, length($2)-3) }')
 wget -q "https://github.com/Bubka/2FAuth/archive/refs/tags/${RELEASE}.zip"
@@ -80,7 +76,6 @@ chmod -R 755 /opt/2fauth
 echo "${RELEASE}" >"/opt/2fauth_version.txt"
 msg_ok "Setup 2fauth"
 
-# Configure Service (NGINX)
 msg_info "Configure Service"
 cat <<EOF >/etc/nginx/conf.d/2fauth.conf
 server {
@@ -117,7 +112,6 @@ msg_ok "Configured Service"
 motd_ssh
 customize
 
-# Cleanup
 msg_info "Cleaning up"
 rm -f "/opt/v${RELEASE}.zip"
 $STD apt-get -y autoremove
