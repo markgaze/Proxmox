@@ -21,7 +21,7 @@
 
 ### About
 
-Ports of the [Promox VE Helper Scripts](https://github.com/community-scripts/proxmoxve) to ARM64.
+Ports the [Promox VE Helper Scripts](https://github.com/community-scripts/proxmoxve) project to ARM64.
 
 Find the scripts in the website linked above.
 
