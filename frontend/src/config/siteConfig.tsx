@@ -9,7 +9,7 @@ const isMobile = typeof window !== "undefined" && window.innerWidth < 640;
 
 export const navbarLinks = [
   {
-    href: `https://github.com/asylumexp/Proxmox`,
+    href: `https://github.com/markgaze/Proxmox`,
     event: "Github",
     icon: <FaGithub className="h-4 w-4" />,
     text: "Github",
@@ -21,13 +21,13 @@ export const navbarLinks = [
     text: "Discord",
   },
   {
-    href: `https://github.com/asylumexp/Proxmox/blob/main/CHANGELOG.md`,
+    href: `https://github.com/markgaze/Proxmox/blob/main/CHANGELOG.md`,
     event: "Change Log",
     icon: <Scroll className="h-4 w-4" />,
     text: "Change Log",
   },
   {
-        href: `https://github.com/asylumexp/Proxmox/discussions`,
+        href: `https://github.com/markgaze/Proxmox/discussions`,
         event: "Discussions",
         icon: <MessagesSquare className="h-4 w-4" />,
         text: "Discussions"

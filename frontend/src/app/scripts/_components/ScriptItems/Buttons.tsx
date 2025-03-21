@@ -10,13 +10,13 @@ const generateInstallSourceUrl = (slug: string) => {
 };
 
 const generateSourceUrl = (slug: string, type: string) => {
-  const baseUrl = `https://raw.githubusercontent.com/asylumexp/${basePath}/main`;
+  const baseUrl = `https://raw.githubusercontent.com/markgaze/${basePath}/main`;
   return type === "vm" ? `${baseUrl}/vm/${slug}.sh` : `${baseUrl}/misc/${slug}.sh`;
   return `${baseUrl}/misc/${slug}.sh`;
 };
 
 const generateUpdateUrl = (slug: string) => {
-  const baseUrl = `https://raw.githubusercontent.com/asylumexp/${basePath}/main`;
+  const baseUrl = `https://raw.githubusercontent.com/markgaze/${basePath}/main`;
   return `${baseUrl}/ct/${slug}.sh`;
 };
 

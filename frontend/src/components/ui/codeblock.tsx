@@ -68,7 +68,7 @@ const handleCopy = (type: string, value: string) => {
             <div>
               <Button className="text-white">
                 <Link
-                  href={`https://github.com/asylumexp/Proxmox`}
+                  href={`https://github.com/markgaze/Proxmox`}
                   data-umami-event="Star on Github"
                   target="_blank"
                 >

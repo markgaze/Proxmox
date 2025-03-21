@@ -3,7 +3,7 @@
 # Copyright (c) 2021-2025 tteck
 # Author: tteck (tteckster)
 # Co-Author: MickLesk
-# License: MIT | https://github.com/asylumexp/Proxmox/raw/main/LICENSE
+# License: MIT | https://github.com/markgaze/Proxmox/raw/main/LICENSE
 
 # This sets verbose mode if the global variable is set to "yes"
 # if [ "$VERBOSE" == "yes" ]; then set -x; fi
@@ -233,7 +233,7 @@ if [ -d "/var/lib/vz/template/cache" ]; then
   if [ ! -f "/var/lib/vz/template/cache/$TEMPLATE" ]; then
     if [ $PCT_OSTYPE = debian ]; then
       msg_info "Downloading LXC Template"
-      wget -q $(curl -s https://api.github.com/repos/asylumexp/debian-ifupdown2-lxc/releases/latest | grep download | grep debian-$TEMPLATE_VARIENT-arm64-rootfs.tar.xz | cut -d\" -f4) -O /var/lib/vz/template/cache/$TEMPLATE -q || exit "A problem occured while downloading the LXC template."
+      wget -q $(curl -s https://api.github.com/repos/markgaze/debian-ifupdown2-lxc/releases/latest | grep download | grep debian-$TEMPLATE_VARIENT-arm64-rootfs.tar.xz | cut -d\" -f4) -O /var/lib/vz/template/cache/$TEMPLATE -q || exit "A problem occured while downloading the LXC template."
       msg_ok "Downloaded LXC Template"
     else
       templateurl="https://jenkins.linuxcontainers.org/job/image-$PCT_OSTYPE/architecture=arm64,release=$TEMPLATE_VARIENT,variant=default/lastStableBuild/artifact/rootfs.tar.xz"

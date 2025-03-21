@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-source <(curl -s https://raw.githubusercontent.com/asylumexp/Proxmox/main/misc/build.func)
+source <(curl -s https://raw.githubusercontent.com/markgaze/Proxmox/main/misc/build.func)
 # Source: https://github.com/gristlabs/grist-core
 # Author: tteck (tteckster)
-# License: MIT | https://github.com/asylumexp/Proxmox/raw/main/LICENSE
+# License: MIT | https://github.com/markgaze/Proxmox/raw/main/LICENSE
 
 APP="Grist"
 var_tags="database;spreadsheet"

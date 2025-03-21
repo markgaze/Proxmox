@@ -13,7 +13,7 @@ export default function StarOnGithubButton() {
     const fetchStars = async () => {
       try {
         const res = await fetch(
-          `https://api.github.com/repos/asylumexp/${basePath}`,
+          `https://api.github.com/repos/markgaze/${basePath}`,
           {
             next: { revalidate: 60 * 60 * 24 },
           },

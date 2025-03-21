@@ -1,6 +1,6 @@
 <div align="center">
   <a href="#">
-    <img src="https://raw.githubusercontent.com/asylumexp/Proxmox/main/misc/images/logo.png" height="100px" />
+    <img src="https://raw.githubusercontent.com/markgaze/Proxmox/main/misc/images/logo.png" height="100px" />
  </a>
 </div>
 <h1 align="center">Proxmox arm64 Install Scripts</h1>
@@ -8,14 +8,14 @@
 
 <p align="center">
   <a href="https://pimox-scripts.com">Website</a> | 
-  <a href="https://github.com/asylumexp/Proxmox/blob/main/.github/CONTRIBUTING.md">Contribute</a> |
-  <a href="https://github.com/asylumexp/Proxmox/blob/main/USER_SUBMITTED_GUIDES.md">Guides</a> |
-  <a href="https://github.com/asylumexp/Proxmox/blob/main/CHANGELOG.md">Changelog</a> |
+  <a href="https://github.com/markgaze/Proxmox/blob/main/.github/CONTRIBUTING.md">Contribute</a> |
+  <a href="https://github.com/markgaze/Proxmox/blob/main/USER_SUBMITTED_GUIDES.md">Guides</a> |
+  <a href="https://github.com/markgaze/Proxmox/blob/main/CHANGELOG.md">Changelog</a> |
   <a href="https://ko-fi.com/D1D7EP4GF">Support (tteck)</a>
 </p>
 
 <p align="center">
-<img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/asylumexp/proxmox?style=flat">
+<img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/markgaze/proxmox?style=flat">
 
 ## </p>
 
